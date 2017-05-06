@@ -1,0 +1,48 @@
+<div class="row">
+
+  <div class="col-md-8 col-md-offset-2">
+    <h2 class="text-center">Cadastre-se agora</h2>
+    <form name="signup">
+      <div class="form-group">
+        <label for="signup.cpf">CPF</label>
+        <input type="cpf" ng-cpf ui-mask="999.999.999-99" id="signup.cpf" required class="form-control" ng-model="signup.cpf" placeholder="" name="signup.cpf">
+      </div>
+      <div class="form-group">
+        <label for="signup.name">Nome</label>
+        <input type="text" class="form-control" id="signup.name" ng-model="signup.name" placeholder="Insira seu nome completo" name="signup.name" ng-minlength="10" required>
+      </div>
+      <div class="form-group">
+        <label for="signup.email">E-mail</label>
+        <input type="email" class="form-control" id="signup.email" ng-model="signup.email" placeholder="Insira seu e-mail" name="signup.email" required>
+      </div>
+      <div class="form-group">
+        <label for="signup.password">Senha</label>
+        <input type="password" class="form-control" id="signup.password" ng-model="signup.password" placeholder="Insira sua senha" name="signup.password" ng-minlength="6" required>
+      </div>
+      <div class="form-group">
+        <label for="category">Em que categoria deseja se inscrever?</label>
+        <select class="form-control" ng-init="category = options[0].value" ng-valid="verifyCategory(this)" name="category" ng-model="category" id="category" required>
+          <option value="">Escolha sua categoria</option>
+          <option value="students">Estudante</option>
+          <option value="partners">Parceiro</option>
+        </select>
+      </div>
+      <div>
+        <div ng-if="signup.category.$valid" class="form-group" ng-repeat="question in questions">
+          <label for="answer{{ $index+1 }}">{{ question.question }}</label>
+          <textarea class="form-control" id="signup.answer{{ $index+1 }}" rows="3" name="signup.answer{{ $index+1 }}" ng-model="signup.answer[$index]" ng-minlength="12" required></textarea>
+        </div>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" ng-model="signup.bolsa" name="signup.bolsa">Solicitar Bolsa de estudos</label>
+      </div>
+      <div ng-if="signup.bolsa" class="form-group">
+        <label for="scholarship">Por que você deseja a bolsa?</label>
+        <textarea class="form-control" id="signup.scholarship" rows="3" name="signup.scholarship" ng-model="signup.scholarship" ng-minlength="12" required></textarea>
+      </div>
+      <div class="col-sm-3 col-sm-offset-4">
+        <button type="button" ng-click="finishSignup(signup)" ng-disabled="signup.$invalid" ng-click="finishSignup()" class="btn btn-default signup-button">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</div>
